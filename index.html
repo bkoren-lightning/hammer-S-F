@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hammer Strength & Fitness — Clinton, IL</title>
+<style>
+  :root{
+    --ink:#17181A;
+    --surface:#201E1C;
+    --surface-2:#2A2725;
+    --steel:#8D8B85;
+    --steel-light:#B8B5AE;
+    --rust:#C4501E;
+    --rust-dark:#9A3B14;
+    --paper:#EFEAE0;
+    --hazard:#E0A526;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Work Sans', 'Segoe UI', Arial, sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Oswald','Arial Narrow',sans-serif;
+    font-weight:600;
+    letter-spacing:0.01em;
+    line-height:1.08;
+  }
+  a{color:inherit;}
+  img,svg{display:block;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px;}
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{outline:3px solid var(--hazard); outline-offset:3px;}
+
+  /* hazard divider */
+  .hazard-bar{
+    height:10px;
+    background:repeating-linear-gradient(135deg, var(--hazard) 0 18px, var(--ink) 18px 36px);
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:40;
+    background:rgba(23,24,26,0.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid #34302C;
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:16px; padding-bottom:16px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:12px;
+    font-family:'Oswald',sans-serif; font-size:1.25rem; font-weight:600;
+    text-decoration:none; color:var(--paper);
+  }
+  .brand svg{width:30px;height:30px;flex-shrink:0;}
+  .navlinks{display:flex; gap:32px; list-style:none;}
+  .navlinks a{text-decoration:none; font-size:0.95rem; color:var(--steel-light); transition:color .15s;}
+  .navlinks a:hover{color:var(--rust);}
+  .navlinks{display:none;}
+  @media(min-width:760px){ .navlinks{display:flex;} }
+  .call-pill{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--rust); color:var(--paper);
+    padding:9px 18px; border-radius:2px;
+    text-decoration:none; font-size:0.92rem; font-weight:600;
+    white-space:nowrap;
+  }
+  .call-pill:hover{background:var(--rust-dark);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:88px 0 72px;
+    overflow:hidden;
+    border-bottom:1px solid #34302C;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      linear-gradient(180deg, rgba(23,24,26,0) 0%, var(--ink) 92%),
+      repeating-linear-gradient(90deg, #201E1C 0 1px, transparent 1px 90px);
+    opacity:0.9;
+    pointer-events:none;
+  }
+  .hero-grid{
+    position:relative; z-index:1;
+    display:grid; grid-template-columns:1fr; gap:40px; align-items:end;
+  }
+  @media(min-width:860px){ .hero-grid{grid-template-columns:1.3fr 0.9fr;} }
+  .kicker{color:var(--rust); font-size:0.95rem; font-weight:600; margin-bottom:14px;}
+  h1.headline{
+    font-size:clamp(2.4rem, 6vw, 4.1rem);
+    text-transform:uppercase;
+    color:var(--paper);
+  }
+  h1.headline .thin{color:var(--steel-light);}
+  .hero p.lede{
+    max-width:46ch; margin-top:22px; color:var(--steel-light); font-size:1.08rem;
+  }
+  .hero-actions{display:flex; flex-wrap:wrap; gap:14px; margin-top:32px;}
+  .btn-outline{
+    display:inline-flex; align-items:center; gap:8px;
+    border:1px solid #4A453F; color:var(--paper);
+    padding:12px 20px; text-decoration:none; font-size:0.95rem; font-weight:600;
+    border-radius:2px; transition:border-color .15s;
+  }
+  .btn-outline:hover{border-color:var(--rust); color:var(--rust);}
+
+  .hero-mark{
+    justify-self:end;
+    opacity:0.9;
+  }
+  .hero-mark svg{width:100%; max-width:280px; height:auto;}
+
+  .hero-stats{
+    display:grid; grid-template-columns:repeat(3,1fr);
+    border-top:1px solid #34302C; margin-top:56px; padding-top:26px;
+    gap:20px;
+  }
+  .hero-stats div{border-left:2px solid var(--rust); padding-left:14px;}
+  .hero-stats .num{font-family:'Oswald',sans-serif; font-size:1.5rem;}
+  .hero-stats .lbl{color:var(--steel); font-size:0.85rem; margin-top:2px;}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:76px 0;}
+  .section-head{max-width:60ch; margin-bottom:44px;}
+  .section-head h2{font-size:clamp(1.7rem,3.4vw,2.4rem); text-transform:uppercase;}
+  .section-head p{color:var(--steel-light); margin-top:14px;}
+
+  /* ---------- ABOUT ---------- */
+  .about{display:grid; grid-template-columns:1fr; gap:48px;}
+  @media(min-width:860px){ .about{grid-template-columns:1fr 1fr;} }
+  .about .copy p{margin-bottom:16px; color:var(--steel-light);}
+  .about .copy p:first-child{color:var(--paper); font-size:1.12rem;}
+  .fact-list{list-style:none; border-top:1px solid #34302C;}
+  .fact-list li{
+    display:flex; justify-content:space-between; gap:20px;
+    padding:16px 0; border-bottom:1px solid #34302C;
+    font-size:0.98rem;
+  }
+  .fact-list span:first-child{color:var(--steel);}
+  .fact-list span:last-child{text-align:right; color:var(--paper); font-weight:500;}
+
+  /* ---------- AMENITIES ---------- */
+  .amenities-grid{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:1px;
+    background:#34302C; border:1px solid #34302C;
+  }
+  @media(min-width:640px){ .amenities-grid{grid-template-columns:repeat(3,1fr);} }
+  .amenity{
+    background:var(--surface); padding:30px 24px; min-height:168px;
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .amenity svg{width:30px; height:30px; color:var(--rust);}
+  .amenity h3{font-size:1.05rem; text-transform:none; font-weight:600; color:var(--paper);}
+  .amenity p{font-size:0.92rem; color:var(--steel);}
+  .amenity.soon{position:relative;}
+  .amenity.soon::after{
+    content:"In progress"; position:absolute; top:16px; right:16px;
+    font-size:0.7rem; color:var(--hazard); border:1px solid var(--hazard);
+    padding:2px 8px; border-radius:20px;
+  }
+
+  /* ---------- HOURS ---------- */
+  .hours-board{
+    background:var(--surface); border:1px solid #34302C; border-radius:2px;
+    display:grid; grid-template-columns:1fr; overflow:hidden;
+  }
+  @media(min-width:760px){ .hours-board{grid-template-columns:1fr 1fr;} }
+  .hours-col{padding:36px 34px;}
+  .hours-col + .hours-col{border-top:1px solid #34302C;}
+  @media(min-width:760px){ .hours-col + .hours-col{border-top:none; border-left:1px solid #34302C;} }
+  .hours-col h3{font-size:1.15rem; text-transform:uppercase; color:var(--rust); margin-bottom:6px;}
+  .hours-col .sub{color:var(--steel); font-size:0.9rem; margin-bottom:22px;}
+  .hours-row{display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px solid #2E2B28; font-size:0.95rem;}
+  .hours-row:last-child{border-bottom:none;}
+  .hours-row span:last-child{color:var(--paper); font-weight:500;}
+  .note{margin-top:20px; font-size:0.85rem; color:var(--steel); line-height:1.55;}
+
+  /* ---------- VISIT / CONTACT ---------- */
+  .visit{
+    background:var(--surface-2); border-radius:2px; border:1px solid #3A3530;
+    padding:48px; display:grid; grid-template-columns:1fr; gap:36px;
+  }
+  @media(min-width:760px){ .visit{grid-template-columns:1.1fr 0.9fr; padding:56px;} }
+  .visit h2{font-size:clamp(1.6rem,3vw,2.1rem); text-transform:uppercase; margin-bottom:16px;}
+  .visit p{color:var(--steel-light); max-width:42ch;}
+  .contact-list{list-style:none; margin-top:26px;}
+  .contact-list li{display:flex; gap:14px; align-items:flex-start; margin-bottom:16px;}
+  .contact-list svg{width:20px; height:20px; color:var(--rust); flex-shrink:0; margin-top:2px;}
+  .contact-list a{text-decoration:none; color:var(--paper);}
+  .contact-list a:hover{color:var(--rust);}
+  .visit-cta{
+    display:flex; flex-direction:column; justify-content:center; gap:14px;
+    border-left:0; 
+  }
+  @media(min-width:760px){ .visit-cta{border-left:1px solid #4A453F; padding-left:36px;} }
+  .btn-rust{
+    display:inline-flex; align-items:center; justify-content:center; gap:10px;
+    background:var(--rust); color:var(--paper); text-decoration:none;
+    padding:15px 22px; font-weight:600; font-size:1rem; border-radius:2px;
+    transition:background .15s;
+  }
+  .btn-rust:hover{background:var(--rust-dark);}
+  .visit-cta .small{color:var(--steel); font-size:0.85rem;}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid #34302C; padding:34px 0;}
+  footer .wrap{display:flex; flex-wrap:wrap; justify-content:space-between; gap:14px; align-items:center;}
+  footer p{color:var(--steel); font-size:0.85rem;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a href="#top" class="brand">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 15l6-6 2 2-6 6-2-2z"/><path d="M13 9l4-4a2 2 0 0 1 3 3l-4 4"/><path d="M9 11l4 4"/></svg>
+      Hammer Strength &amp; Fitness
+    </a>
+    <ul class="navlinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#amenities">Amenities</a></li>
+      <li><a href="#hours">Hours</a></li>
+      <li><a href="#visit">Visit</a></li>
+    </ul>
+    <a class="call-pill" href="tel:2175700060">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      (217) 570-0060
+    </a>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="kicker">Clinton, Illinois — locally run since day one</div>
+        <h1 class="headline">Show up.<br>Do the <span class="thin">work.</span></h1>
+        <p class="lede">A no-frills, full weight room and cardio gym on Madison Street. Free weights, machines, group classes, sauna and tanning — plus a key for the members who train before the sun's up.</p>
+        <div class="hero-actions">
+          <a class="btn-rust" href="tel:2175700060">Call (217) 570-0060</a>
+          <a class="btn-outline" href="#visit">Get directions
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="hero-mark" aria-hidden="true">
+        <svg viewBox="0 0 200 200" fill="none" stroke="#4A453F" stroke-width="1.4">
+          <circle cx="100" cy="100" r="70" stroke-dasharray="4 6"/>
+          <path d="M60 130l35-35 10 10-35 35-10-10z" stroke="#C4501E" stroke-width="2.5"/>
+          <path d="M95 95l25-25a11 11 0 0 1 16 16l-25 25" stroke="#C4501E" stroke-width="2.5"/>
+          <path d="M78 108l18 18" stroke="#C4501E" stroke-width="2.5"/>
+        </svg>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="hero-stats">
+        <div><div class="num">4am–10pm</div><div class="lbl">Access with a key</div></div>
+        <div><div class="num">310 N Madison</div><div class="lbl">St, Clinton, IL 61727</div></div>
+        <div><div class="num">6</div><div class="lbl">Ways to train — weights to sauna</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="hazard-bar" aria-hidden="true"></div>
+
+  <section id="about">
+    <div class="wrap about">
+      <div class="copy">
+        <p>Hammer Strength &amp; Fitness has been Clinton's gym for the people who'd rather lift something heavy than scroll past another ad for one. It's a straightforward setup — no juice bar, no gimmicks — just equipment that works and people who'll spot you if you ask.</p>
+        <p>The gym is staffed mornings and evenings, and open around the clock to members who've picked up a key. Regulars know each other by name, instructors run classes for every level, and the newest addition — a basketball court — is going in now.</p>
+      </div>
+      <ul class="fact-list">
+        <li><span>Address</span><span>310 N Madison St, Clinton, IL 61727</span></li>
+        <li><span>Phone</span><span>(217) 570-0060</span></li>
+        <li><span>Staffed hours</span><span>8am–12pm &amp; 4pm–8pm</span></li>
+        <li><span>Key-holder access</span><span>4am–10pm daily</span></li>
+        <li><span>On site</span><span>Weights, cardio, classes, sauna, tanning</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="amenities">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What's on the floor</h2>
+        <p>Everything a serious training session needs, under one roof on Madison Street.</p>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="amenities-grid">
+        <div class="amenity">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12h2M20 12h2M6 12h12M6 8v8M18 8v8M4 9v6M20 9v6"/></svg>
+          <h3>Free weights</h3>
+          <p>A full rack of plates, bars and dumbbells for anyone building real strength.</p>
+        </div>
+        <div class="amenity">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="9" width="4" height="10"/><rect x="10" y="4" width="4" height="15"/><rect x="17" y="12" width="4" height="7"/></svg>
+          <h3>Cardio &amp; machines</h3>
+          <p>Selectorized machines and cardio equipment for warm-ups, circuits or full sessions.</p>
+        </div>
+        <div class="amenity">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="7" r="3"/><path d="M5 21v-4a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v4"/></svg>
+          <h3>Group classes</h3>
+          <p>Instructor-led classes through the week, modified for whatever shape you're in.</p>
+        </div>
+        <div class="amenity">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2c2 3 3 5 3 7a3 3 0 1 1-6 0c0-2 1-4 3-7z"/><path d="M6 21h12M8 17c0 2 1.5 4 4 4s4-2 4-4"/></svg>
+          <h3>Sauna</h3>
+          <p>Sweat it out and recover after leg day, included with membership.</p>
+        </div>
+        <div class="amenity">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="5"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6L17 7M7 17l-1.4 1.4"/></svg>
+          <h3>Tanning</h3>
+          <p>Beds available on site for members who want it.</p>
+        </div>
+        <div class="amenity soon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18M3 12h18M6.5 6.5a12 12 0 0 0 11 0M6.5 17.5a12 12 0 0 1 11 0"/></svg>
+          <h3>Basketball court</h3>
+          <p>A full court is being added to the gym — more room to move, coming soon.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="hours">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Hours &amp; access</h2>
+        <p>Staff are on the floor mornings and evenings. Pick up a key and the gym is yours before or after.</p>
+      </div>
+      <div class="hours-board">
+        <div class="hours-col">
+          <h3>Staffed hours</h3>
+          <div class="sub">Someone's at the desk, classes run on schedule.</div>
+          <div class="hours-row"><span>Morning block</span><span>8:00am – 12:00pm</span></div>
+          <div class="hours-row"><span>Evening block</span><span>4:00pm – 8:00pm</span></div>
+          <p class="note">Stop by during these windows to tour the gym, ask about membership, or join a class without a key.</p>
+        </div>
+        <div class="hours-col">
+          <h3>Key-holder access</h3>
+          <div class="sub">For members who've purchased a key.</div>
+          <div class="hours-row"><span>Early morning</span><span>4:00am – 8:00am</span></div>
+          <div class="hours-row"><span>Midday</span><span>12:00pm – 4:00pm</span></div>
+          <div class="hours-row"><span>Late evening</span><span>8:00pm – 10:00pm</span></div>
+          <p class="note">Lock the door behind you when you come and go — these hours are reserved for key holders only.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="visit">
+    <div class="wrap">
+      <div class="visit">
+        <div>
+          <h2>Come see the gym</h2>
+          <p>The best way to know if a gym's right for you is to walk the floor. Stop by during staffed hours, or call ahead to ask about a key.</p>
+          <ul class="contact-list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <a href="https://maps.google.com/?q=310+N+Madison+St,+Clinton,+IL+61727" target="_blank" rel="noopener">310 N Madison St, Clinton, IL 61727</a>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <a href="tel:2175700060">(217) 570-0060</a>
+            </li>
+          </ul>
+        </div>
+        <div class="visit-cta">
+          <a class="btn-rust" href="tel:2175700060">Call the gym</a>
+          <a class="btn-outline" href="https://maps.google.com/?q=310+N+Madison+St,+Clinton,+IL+61727" target="_blank" rel="noopener">Open in Maps</a>
+          <span class="small">Walk-ins welcome during staffed hours.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Hammer Strength &amp; Fitness — 310 N Madison St, Clinton, IL 61727</p>
+    <p>(217) 570-0060</p>
+  </div>
+</footer>
+
+</body>
+</html>
